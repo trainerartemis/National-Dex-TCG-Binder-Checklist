@@ -112,16 +112,16 @@ function createCard(i) {
 
     // Add the dynamic link to each card
     const linkDiv = document.createElement("div");
-linkDiv.classList.add("pokemon-card-link");
+    linkDiv.classList.add("pokemon-card-link");
 
-const link = document.createElement("a");
-link.href = `https://app.getcollectr.com/?query=${name}&cardType=cards`; // Updated URL with cardType=cards
-link.target = "_blank";
+    const link = document.createElement("a");
+    link.href = `https://app.getcollectr.com/?query=${name}&cardType=cards`; // Updated URL with cardType=cards
+    link.target = "_blank";
 
-// Use innerHTML to add a <br> tag for line break
-link.innerHTML = `Check out<br>${displayName} Cards`; // Dynamic text with a line break
+    // Use innerHTML to add a <br> tag for line break
+    link.innerHTML = `Check out<br>${displayName} Cards`; // Dynamic text with a line break
 
-linkDiv.appendChild(link);
+    linkDiv.appendChild(link);
 
     // Prevent the collection toggle when clicking the link
     link.addEventListener("click", (event) => {
@@ -307,6 +307,7 @@ searchBtn.addEventListener("click", () => {
     if (val) searchPokemon(val);
 });
 
+// Updated searchPokemon function
 function searchPokemon(val) {
     val = val.trim().toLowerCase();
 
@@ -325,14 +326,46 @@ function searchPokemon(val) {
         return alert("Pokémon not found!");
     }
 
-    // Force binder view
+    // Find the Pokémon's generation
+    let genNumber;
+    for (const [gen, range] of Object.entries(generationMap)) {
+        if (id >= range.start && id <= range.end) {
+            genNumber = gen;
+            break;
+        }
+    }
+
+    // Update the gen tab (highlight the active generation tab)
+    genTabs.forEach(tab => tab.classList.remove("active"));
+    const genTab = document.querySelector(`.gen-tab[data-gen="${genNumber}"]`);
+    if (genTab) {
+        genTab.classList.add("active");
+    }
+
+    // Update the binder and page status
+    const globalPage = Math.ceil(id / pageSize); // Calculate global page number for the Pokémon
+    currentBinder = Math.ceil(globalPage / pagesPerBinder);
+    currentPage = globalPage - ((currentBinder - 1) * pagesPerBinder);
+    binderDropdown.value = currentBinder;
+    binderPageStatus.textContent = `Binder ${currentBinder} — Page ${currentPage} of ${pagesPerBinder}`;
+    
+    // Force binder view (not missing cards)
     showMissingOnly = false;
     grid.style.display = "grid";
     missingGrid.style.display = "none";
 
     // Clear and show the found Pokémon
     grid.innerHTML = "";
-    grid.appendChild(createCard(id));
+    const foundCard = createCard(id);  // This creates the card
+
+    // Debugging - Check if the foundCard is valid
+    console.log("Created card:", foundCard);
+    
+    // Add the found card to the grid
+    grid.appendChild(foundCard);
+
+    // Optionally, call renderCurrentPage to ensure correct display of other cards in the grid
+    renderCurrentPage();
 }
 
 document.getElementById('clearAllBtn').addEventListener('click', function() {
