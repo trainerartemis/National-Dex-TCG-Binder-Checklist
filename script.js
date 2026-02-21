@@ -368,7 +368,10 @@ function searchPokemon(val) {
     renderCurrentPage();
 }
 
-document.getElementById('clearAllBtn').addEventListener('click', function() {
+document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+document.getElementById('clearAllBtn').addEventListener('touchend', clearAll);  // Added for mobile
+
+function clearAll() {
     // Show a confirmation prompt before clearing all data
     if (confirm('Are you sure you want to clear all progress? This cannot be undone.')) {
         // Clear all localStorage data
@@ -393,7 +396,7 @@ document.getElementById('clearAllBtn').addEventListener('click', function() {
         // Optionally, notify the user that the data was cleared
         alert('All progress has been cleared.');
     }
-});
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchPokemonNames().then(() => {
@@ -402,3 +405,4 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCompletion();
     });
 });
+
