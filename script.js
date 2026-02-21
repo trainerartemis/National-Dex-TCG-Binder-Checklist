@@ -369,31 +369,29 @@ function searchPokemon(val) {
 }
 
 document.getElementById('clearAllBtn').addEventListener('click', clearAll);
-document.getElementById('clearAllBtn').addEventListener('touchend', clearAll);  // Added for mobile
+
+document.getElementById('clearAllBtn').addEventListener('touchend', function(e) {
+    e.preventDefault(); // Prevent the default behavior
+    clearAll();          // Trigger the clearAll function
+});
 
 function clearAll() {
-    // Show a confirmation prompt before clearing all data
     if (confirm('Are you sure you want to clear all progress? This cannot be undone.')) {
-        // Clear all localStorage data
         localStorage.clear();
-        
-        // Reset all gen tabs to '0 / 0' for progress
+
+        // Reset all gen tabs
+        const genTabs = document.querySelectorAll('.gen-tab');
         genTabs.forEach(tab => {
-            tab.textContent = `Gen ${tab.dataset.gen}: 0 / 0`;  // Reset text for each gen tab
-            tab.classList.remove('completed');  // Remove any 'completed' class
+            tab.textContent = `Gen ${tab.dataset.gen}: 0 / 0`;
+            tab.classList.remove('completed');
         });
-        
-        // Reset the total progress tab to '0 / 1025'
+
+        // Reset total progress
         const totalTab = document.getElementById("totalProgress");
-        totalTab.textContent = `Total: 0 / 1025`;  // Or update as needed
-        
-        // Call the function to update progress and visuals
-        updateCompletion();  // Recalculate and update the completion progress
-        
-        // Optionally, re-render the page content (e.g., Pokémon cards)
-        renderCurrentPage();  // Re-render the current page's content
-        
-        // Optionally, notify the user that the data was cleared
+        totalTab.textContent = `Total: 0 / 1025`;
+
+        updateCompletion();
+        renderCurrentPage();
         alert('All progress has been cleared.');
     }
 }
@@ -405,4 +403,5 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCompletion();
     });
 });
+
 
