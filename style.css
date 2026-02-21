@@ -447,28 +447,28 @@ button:active {
     box-shadow: 0 0 8px var(--card-glow);
 }
 
-/* Responsive tweaks */
 @media (max-width: 600px) {
     .controls {
         flex-direction: column;
         align-items: stretch;
-        gap: 0.5rem;
+        gap: 1rem; /* Increased gap between items */
+        padding: 1rem; /* Add padding to the container for spacing */
     }
 
     .control-item {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column; /* Stack label and input vertically */
         width: 100%;
     }
 
     .search-container {
         flex-direction: column;
         align-items: stretch;
-        gap: 0.3rem;
+        gap: 0.5rem; /* Increased gap between search input and button */
     }
 
     #searchPokemon {
         width: 100%;
+        padding: 0.6rem 1rem; /* Increased padding for better touch target */
     }
 
     .autocomplete-items {
@@ -481,36 +481,46 @@ button:active {
     }
 
     .pokemon-name {
-        font-size: 1rem; /* Increased font size */
+        font-size: 1.2rem; /* Increased font size */
     }
 
     .pokemon-number {
-        font-size: 0.9rem;
+        font-size: 1rem; /* Increased font size */
     }
 
     .gen-tab {
-        padding: 0.5rem 0.7rem;
-        font-size: 1rem; /* Increased font size for better readability */
+        padding: 0.6rem 1rem; /* Larger padding */
+        font-size: 1.2rem; /* Increased font size for better readability */
     }
 
     /* Increased font sizes for controls section */
     .control-item label {
-        font-size: 1rem; /* Larger font size */
+        font-size: 1.1rem; /* Larger font size */
+        margin-bottom: 0.5rem; /* Space between label and input */
     }
 
     select,
     #searchPokemon,
     #searchBtn,
     .toggle-btn {
-        font-size: 1rem; /* Larger font size for select inputs and buttons */
+        font-size: 1.2rem; /* Larger font size for better readability */
+        padding: 0.8rem 1.2rem; /* Increased padding for better touch target */
     }
 
     /* For general buttons */
     button {
-        font-size: 1rem; /* Larger font size */
+        font-size: 1.2rem; /* Larger font size */
+        padding: 1rem 2rem; /* Larger padding */
+    }
+
+    /* Handle the navigation buttons */
+    .navigation button {
+        font-size: 1.5rem; /* Larger font size */
+        padding: 1rem 2rem; /* Increase padding for bigger buttons */
+        min-width: 150px; /* Ensure buttons don't shrink too much */
     }
 
     #pageNumber {
-        font-size: 1.1rem;  /* Slightly larger font size */
+        font-size: 1.3rem; /* Larger font size */
     }
 }
