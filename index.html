@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokémon TCG Binder Checklist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>National Dex TCG Binder Checklist</h1>
+    </header>
+
+    <section class="controls">
+        <div class="control-item">
+            <label for="binderSize">Binder Layout:</label>
+            <select id="binderSize">
+                <option value="9">9-pocket (3x3)</option>
+                <option value="12">12-pocket (3x4)</option>
+                <option value="16">16-pocket (4x4)</option>
+            </select>
+        </div>
+
+        <div class="control-item">
+            <label for="binderNumber">Binder:</label>
+            <select id="binderNumber"></select>
+        </div>
+
+        <div class="search-container">
+            <label for="searchPokemon">🔍</label>
+            <div class="input-wrapper">
+                <input type="text" id="searchPokemon" placeholder="Enter name or number">
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+            <button id="searchBtn">Go</button>
+        </div>
+
+        <div class="control-item">
+            <button id="toggleMissingBtn" class="toggle-btn">Show Missing</button>
+        </div>
+    </section>
+
+    <nav class="gen-tabs" id="genTabs">
+        <button class="gen-tab total" disabled id="totalProgress">Total: 0 / 1025</button>
+        <button class="gen-tab active" data-gen="1">Gen 1: 0 / 151</button>
+        <button class="gen-tab" data-gen="2">Gen 2: 0 / 100</button>
+        <button class="gen-tab" data-gen="3">Gen 3: 0 / 135</button>
+        <button class="gen-tab" data-gen="4">Gen 4: 0 / 107</button>
+        <button class="gen-tab" data-gen="5">Gen 5: 0 / 156</button>
+        <button class="gen-tab" data-gen="6">Gen 6: 0 / 72</button>
+        <button class="gen-tab" data-gen="7">Gen 7: 0 / 88</button>
+        <button class="gen-tab" data-gen="8">Gen 8: 0 / 96</button>
+        <button class="gen-tab" data-gen="9">Gen 9: 0 / 120</button>
+    </nav>
+
+    <main>
+        <section id="dexGrid" class="grid"></section>
+        <section id="missingGrid" class="grid" style="display:none;"></section>
+    </main>
+
+    <section class="navigation">
+        <button id="prevPage">Previous</button>
+        <span id="pageNumber">Page 1</span>
+        <button id="nextPage">Next</button>
+        <button id="clearPage">Clear Page</button>
+        <button id="addPage">Add Page</button>
+        <div id="binderPageStatus"></div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span>Like this project? ☕<a href="https://buymeacoffee.com/trainerartemis" target="_blank">Buy Me a Coffee</a></span>
+            <span>Follow me:
+            <a href="https://www.youtube.com/@TrainerArtemis" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/YouTube_play_button_circular_%282013-2017%29.svg/960px-YouTube_play_button_circular_%282013-2017%29.svg.png" alt="YouTube" width="20" height="20" />
+            </a>
+            <!--
+            <a href="https://twitter.com/YOUR_TWITTER" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" alt="X" width="20" height="20" />
+            </a>
+            -->
+            <a href="https://www.instagram.com/trainer_artemis" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="20" height="20" />
+            </a>
+            </span>
+        </div>
+        <div class="footer-disclaimer">
+            This website is not produced, endorsed, supported, or affiliated with Nintendo, The Pokémon Company, Collectr, or PokéAPI. Pokémon names and images are © The Pokémon Company, Nintendo, and Game Freak. Card data provided by <a href="https://getcollectr.com/" target="_blank">Collectr</a> and Pokémon data provided by <a href="https://pokeapi.co/" target="_blank">PokéAPI</a>.
+            <br><br>
+            Some links on this site are Amazon Affiliate links, meaning I may earn a small commission if you make a purchase through them, at no extra cost to you. Thank you for supporting the project!
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
