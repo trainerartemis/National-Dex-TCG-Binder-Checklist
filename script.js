@@ -51,11 +51,33 @@ function updateCompletion() {
         for (let i = range.start; i <= range.end && i <= TOTAL_POKEMON; i++) {
             if (localStorage.getItem(padNumber(i)) === "true") collected++;
         }
+
+        // Update tab text and color based on progress
         tab.textContent = `Gen ${gen}: ${collected} / ${range.end - range.start + 1}`;
+        
+        // Change color to green if generation is fully collected
+        if (collected === range.end - range.start + 1) {
+            tab.style.backgroundColor = "#4CAF50"; // Green color for completed gen
+            tab.style.color = "#000000"; // Ensure text is readable
+        } else {
+            tab.style.backgroundColor = ""; // Reset background color if not complete
+            tab.style.color = ""; // Reset text color
+        }
+
         totalCollected += collected;
     });
+
     const totalTab = document.getElementById("totalProgress");
     totalTab.textContent = `Total: ${totalCollected} / ${TOTAL_POKEMON}`;
+
+    // If total is fully collected, color the total tab in green
+    if (totalCollected === TOTAL_POKEMON) {
+        totalTab.style.backgroundColor = "#4CAF50";
+        totalTab.style.color = "#000000";
+    } else {
+        totalTab.style.backgroundColor = "";
+        totalTab.style.color = "";
+    }
 }
 
 function updateGridColumns() {
@@ -312,6 +334,33 @@ function searchPokemon(val) {
     grid.innerHTML = "";
     grid.appendChild(createCard(id));
 }
+
+document.getElementById('clearAllBtn').addEventListener('click', function() {
+    // Show a confirmation prompt before clearing all data
+    if (confirm('Are you sure you want to clear all progress? This cannot be undone.')) {
+        // Clear all localStorage data
+        localStorage.clear();
+        
+        // Reset all gen tabs to '0 / 0' for progress
+        genTabs.forEach(tab => {
+            tab.textContent = `Gen ${tab.dataset.gen}: 0 / 0`;  // Reset text for each gen tab
+            tab.classList.remove('completed');  // Remove any 'completed' class
+        });
+        
+        // Reset the total progress tab to '0 / 1025'
+        const totalTab = document.getElementById("totalProgress");
+        totalTab.textContent = `Total: 0 / 1025`;  // Or update as needed
+        
+        // Call the function to update progress and visuals
+        updateCompletion();  // Recalculate and update the completion progress
+        
+        // Optionally, re-render the page content (e.g., Pokémon cards)
+        renderCurrentPage();  // Re-render the current page's content
+        
+        // Optionally, notify the user that the data was cleared
+        alert('All progress has been cleared.');
+    }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchPokemonNames().then(() => {
