@@ -158,7 +158,7 @@ select:hover {
 .grid, .grid.missing {
     display: grid;
     gap: 2rem;
-    justify-content: center;
+    justify-content: center; /* Centering the items */
     padding: 2rem;
     grid-template-columns: repeat(3, 1fr);
     max-width: 90%;
@@ -267,7 +267,7 @@ button:active {
     text-align: center;
     white-space: nowrap;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 5px var(--shadow-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .gen-tab:hover {
@@ -281,6 +281,12 @@ button:active {
     background-color: var(--accent-color);
     color: #000;
     box-shadow: 0 4px 10px var(--card-glow);
+}
+
+/* Green for completed generation */
+.gen-tab.completed {
+    background-color: #28a745; /* Green for completed generation */
+    color: #fff; /* White text for better visibility */
 }
 
 .gen-tab.total {
@@ -337,23 +343,32 @@ button:active {
     color: var(--text-color);
 }
 
-/* Responsive tweaks */
-@media (max-width: 600px) {
-    .controls { flex-direction: column; align-items: stretch; gap: 0.5rem; }
-    .control-item { flex-direction: row; justify-content: space-between; width: 100%; }
-    .search-container { flex-direction: column; align-items: stretch; gap: 0.3rem; }
-    #searchPokemon { width: 100%; }
-    .autocomplete-items { width: 100%; }
-    .pokemon-card img { width: 80px; height: 80px; }
-    .pokemon-name { font-size: 1rem; }
-    .pokemon-number { font-size: 0.9rem; }
-    .gen-tab { padding: 0.5rem 0.7rem; font-size: 1rem; }
-    .progress-container { width: 90%; }
+/* Footer Social Icons */
+.site-footer .footer-content a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem;
+    border-radius: 50%;
+    background-color: rgba(255, 204, 0, 0.1); /* Light background */
+    margin: 0.3rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-@media (max-width: 400px) {
-    .grid, .grid.missing { grid-template-columns: repeat(2, 1fr); }
-    .pokemon-card { max-width: 100%; }
+.site-footer .footer-content a img {
+    width: 40px; /* Increased icon size */
+    height: 40px;
+}
+
+/* Hover effect with the new color */
+.site-footer .footer-content a:hover {
+    background-color: #0a2538; /* Deep blue color */
+    transform: scale(1.1);
+}
+
+/* For active state when clicked */
+.site-footer .footer-content a:active {
+    background-color: #081a27; /* Slightly darker blue for active state */
 }
 
 /* Miscellaneous */
@@ -403,10 +418,10 @@ button:active {
     border-radius: 5px;
     padding: 0.4rem 0.8rem;
     transition: background-color 0.3s ease, color 0.3s ease;
-    white-space: nowrap;  /* Prevent the text from wrapping to the next line */
-    display: inline-block;  /* Ensures it stays on a single line */
-    overflow: hidden;  /* Hides any overflow in case the text is too long */
-    text-overflow: ellipsis; /* Adds ellipsis (...) if text overflows */
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pokemon-card-link a:hover {
@@ -424,10 +439,78 @@ button:active {
     display: inline-block;
     margin-top: 1rem;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
 }
 
 .check-cards-link:hover {
     background-color: #ffdd33;
     box-shadow: 0 0 8px var(--card-glow);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .control-item {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.3rem;
+    }
+
+    #searchPokemon {
+        width: 100%;
+    }
+
+    .autocomplete-items {
+        width: 100%;
+    }
+
+    .pokemon-card img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .pokemon-name {
+        font-size: 1rem; /* Increased font size */
+    }
+
+    .pokemon-number {
+        font-size: 0.9rem;
+    }
+
+    .gen-tab {
+        padding: 0.5rem 0.7rem;
+        font-size: 1rem; /* Increased font size for better readability */
+    }
+
+    /* Increased font sizes for controls section */
+    .control-item label {
+        font-size: 1rem; /* Larger font size */
+    }
+
+    select,
+    #searchPokemon,
+    #searchBtn,
+    .toggle-btn {
+        font-size: 1rem; /* Larger font size for select inputs and buttons */
+    }
+
+    /* For general buttons */
+    button {
+        font-size: 1rem; /* Larger font size */
+    }
+
+    #pageNumber {
+        font-size: 1.1rem;  /* Slightly larger font size */
+    }
 }
