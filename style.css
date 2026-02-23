@@ -258,8 +258,22 @@ button:active {
 /* For mobile screens (max-width: 600px) - Remove sticky behavior */
 @media (max-width: 600px) {
     .gen-tabs {
-        position: static;  /* Make the nav non-sticky on mobile */
-        top: auto;         /* Reset the top property */
+        position: static;
+        top: auto;
+    }
+
+    .gen-tab {
+        flex: 1 1 auto;
+        max-width: none;
+        white-space: normal;
+        line-height: 1.2;
+        padding: 0.6rem 0.8rem;
+        font-size: 1rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
 }
 
@@ -532,4 +546,3 @@ button:active {
         font-size: 1.3rem; /* Larger font size */
     }
 }
-
